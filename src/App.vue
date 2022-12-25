@@ -17,7 +17,7 @@ export default defineComponent({
     const {
       query: { scene = '' },
     } = options;
-    console.log('---scene', scene);
+    if (!scene) return Promise.reject(null);
     // 登录
     const authStore = useAuthStore();
     await API.auth.TaroLogin();

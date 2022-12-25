@@ -13,7 +13,7 @@ interface LoginResponse {
 // 开发者服务器登录接口
 export async function login(data: LoginParams) {
   return Taro.request<HttpStandardResponse<LoginResponse>, LoginParams>({
-    url: `${BASE_URL}/weixin/login`,
+    url: `${BASE_URL}/mp/mini/login`,
     data,
   });
 }
