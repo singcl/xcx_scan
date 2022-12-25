@@ -1,4 +1,4 @@
-import { login, TaroLogin } from './login';
+import { login, TaroLogin, loginConfirm } from './login';
 import { detail } from './detail';
 
-export { login, TaroLogin, detail };
+export { login, TaroLogin, detail, loginConfirm };

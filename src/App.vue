@@ -3,7 +3,7 @@ import { defineComponent } from 'vue';
 import API from '@/api';
 import { useAuthStore } from '@/stores';
 import { LOGIN_STATUS } from '@/constants';
-import { ensureAvatarUrl } from '@/utils';
+// import { ensureAvatarUrl } from '@/utils';
 import './app.scss';
 
 export default defineComponent({
@@ -22,20 +22,21 @@ export default defineComponent({
     const authStore = useAuthStore();
     await API.auth.TaroLogin();
     authStore.$patch({ loginStatus: LOGIN_STATUS.LOGIN_ALREADY });
-    const {
-      data: { data },
-    } = await API.auth.detail();
-    if (!data) {
-      return Promise.reject(null);
-    }
-    authStore.$patch({
-      userInfo: {
-        nickname: data.nickname,
-        avatarUrl: ensureAvatarUrl(data.avatar_url),
-        mobile: data.mobile,
-        username: data.username,
-      },
-    });
+    await API.auth.loginConfirm({ sc: scene });
+    // const {
+    //   data: { data },
+    // } = await API.auth.detail();
+    // if (!data) {
+    //   return Promise.reject(null);
+    // }
+    // authStore.$patch({
+    //   userInfo: {
+    //     nickname: data.nickname,
+    //     avatarUrl: ensureAvatarUrl(data.avatar_url),
+    //     mobile: data.mobile,
+    //     username: data.username,
+    //   },
+    // });
   },
 });
 </script>

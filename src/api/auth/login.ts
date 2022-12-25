@@ -18,6 +18,14 @@ export async function login(data: LoginParams) {
   });
 }
 
+// 确认登录
+export async function loginConfirm(data: { sc: string }) {
+  return Taro.request<HttpStandardResponse<null>, { sc: string }>({
+    url: `${BASE_URL}/mp/mini/scan/confirm`,
+    data,
+  });
+}
+
 // 小程序登录
 export async function TaroLogin() {
   try {
@@ -44,3 +52,4 @@ export async function TaroLogin() {
     return token;
   }
 }
+
