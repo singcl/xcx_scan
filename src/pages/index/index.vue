@@ -1,45 +1,43 @@
 <template>
   <view class="index">
     <view>
-      <img src="" alt="">
+      <img src="" alt="" />
     </view>
     {{ msg }}
     <view class="btn">
-      <nut-button type="primary" @click="handleClick('text', msg2, true)">点我</nut-button>
+      <nut-button type="primary" @click="handleClick('text', msg2, true)"
+        >点我</nut-button
+      >
     </view>
     <nut-toast :msg="msg" v-model:visible="show" :type="type" :cover="cover" />
   </view>
 </template>
 
-<script>
-import { reactive, toRefs } from 'vue';
-export default {
-  name: 'Index',
-  components: {
-    
-  },
-  setup(){
-    const state = reactive({
-      msg: '欢迎使用 NutUI3.0 开发小程序',
-      msg2: '你成功了～',
-      type: 'text',
-      show: false,
-      cover: false
-    });
+<script setup>
+import { reactive, toRefs } from "vue";
+import Taro, { useLoad } from "@tarojs/taro";
+useLoad(() => {
+  const router = Taro.getCurrentInstance().router;
+  const { scene } = router.params;
+  console.log('----router', router)
+});
 
-    const handleClick = (type, msg, cover = false) => {
-      state.show = true;
-      state.msg2 = msg;
-      state.type = type;
-      state.cover = cover;
-    };
+//
+const state = reactive({
+  msg: "欢迎使用 NutUI3.0 开发小程序",
+  msg2: "你成功了～",
+  type: "text",
+  show: false,
+  cover: false,
+});
 
-    return {
-      ...toRefs(state),
-      handleClick
-    }
-  }
-}
+const handleClick = (type, msg, cover = false) => {
+  state.show = true;
+  state.msg2 = msg;
+  state.type = type;
+  state.cover = cover;
+};
+const { msg, msg2, type, show, cover } = toRefs(state);
 </script>
 
 <style lang="scss">

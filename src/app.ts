@@ -1,13 +1,11 @@
-import { createApp } from 'vue'
+import { createApp } from 'vue';
 import { Button, Toast } from '@nutui/nutui-taro';
+import { pinia } from '@/stores';
 
-import './app.scss'
+import App from './App.vue';
+const app = createApp(App);
 
-const App = createApp({
-  onShow (options) {},
-  // 入口组件不需要实现 render 方法，即使实现了也会被 taro 所覆盖
-})
+app.use(pinia);
+app.use(Button).use(Toast);
 
-App.use(Button).use(Toast)
-
-export default App
+export default app;
