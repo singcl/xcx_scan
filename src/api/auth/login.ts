@@ -26,30 +26,35 @@ export async function loginConfirm(data: { sc: string }) {
   });
 }
 
+// 登录
+async function loginTruth() {
+  const { code } = await Taro.login();
+  const {
+    data: { data },
+  } = await login({ code });
+  if (!data) {
+    return Promise.reject(null);
+  }
+  //
+  const { token } = data;
+  Taro.setStorageSync(LOGIN_TOKEN, token);
+
+  Taro.showToast({
+    title: `登录成功`,
+    icon: 'success',
+    duration: 2000,
+  });
+  return token;
+}
+
 // 小程序登录
-export async function TaroLogin() {
+export async function TaroLogin(forceLogin = false) {
+  if (forceLogin) return loginTruth();
   try {
     await Taro.checkSession();
     const token = Taro.getStorageSync(LOGIN_TOKEN);
     return token ? token : await Promise.reject(null);
   } catch (err) {
-    const { code } = await Taro.login();
-    const {
-      data: { data },
-    } = await login({ code });
-    if (!data) {
-      return Promise.reject(null);
-    }
-    //
-    const { token } = data;
-    Taro.setStorageSync(LOGIN_TOKEN, token);
-
-    Taro.showToast({
-      title: `登录成功`,
-      icon: 'success',
-      duration: 2000,
-    });
-    return token;
+    return loginTruth();
   }
 }
-

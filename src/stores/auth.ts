@@ -56,8 +56,7 @@ export const useAuthStore = defineStore<string, AuthState, AuthGetters, AuthActi
     },
     // 重新登录获取token
     async refreshTokenFunc() {
-      Taro.removeStorageSync(LOGIN_TOKEN);
-      return await API.auth.TaroLogin();
+      return await API.auth.TaroLogin(true);
     },
     // 操作可以通过 this 访问 whole store instance 并提供完整类型（和自动完成✨）支持。
     // @see https://pinia.web3doc.top/core-concepts/actions.html
