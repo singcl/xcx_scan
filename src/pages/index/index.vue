@@ -13,13 +13,10 @@
 
 <script setup>
 import { reactive, toRefs } from 'vue';
-import Taro /*  { useLoad } */ from '@tarojs/taro';
-// useLoad(() => {
-//   const router = Taro.getCurrentInstance().router;
-//   const { scene } = router.params;
-//   console.log('----router', router)
-// });
-
+import Taro, { useLoad } from '@tarojs/taro';
+useLoad(() => {
+  handleLoginConfirm();
+});
 //
 const state = reactive({
   msg: '欢迎使用 NutUI3.0 开发小程序',
@@ -28,6 +25,20 @@ const state = reactive({
   show: false,
   cover: false,
 });
+
+// 确定扫码状态
+async function handleLoginConfirm() {
+  const router = Taro.getCurrentInstance().router;
+  const { scene } = router.params;
+  console.log('场景scene:', scene);
+  if (!scene) return;
+  await API.auth.loginConfirm({ sc: scene });
+  Taro.showToast({
+    title: `扫码成功`,
+    icon: 'success',
+    duration: 2000,
+  });
+}
 
 const handleClick = (type, msg, cover = false) => {
   state.show = true;
