@@ -14,6 +14,7 @@
 <script setup>
 import { reactive, toRefs } from 'vue';
 import Taro, { useLoad } from '@tarojs/taro';
+import API from '@/api';
 useLoad(() => {
   handleLoginConfirm();
 });
