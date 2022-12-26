@@ -26,7 +26,7 @@ const state = reactive({
   cover: false,
 });
 
-// 确定登陆状态
+// 确定扫码状态
 async function handleLoginConfirm() {
   const router = Taro.getCurrentInstance().router;
   const { scene } = router.params;
