@@ -30,9 +30,14 @@ export async function loginConfirm(data: { sc: string }) {
 async function loginTruth() {
   const { code } = await Taro.login();
   const {
-    data: { data },
+    data: { data, msg },
   } = await login({ code });
   if (!data) {
+    Taro.showToast({
+      title: msg,
+      icon: 'none',
+      duration: 2000,
+    });
     return Promise.reject(null);
   }
   //

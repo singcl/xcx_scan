@@ -15,6 +15,7 @@
 import { reactive, toRefs } from 'vue';
 import Taro, { useLoad } from '@tarojs/taro';
 import API from '@/api';
+import { retryGetToken } from '@/utils';
 useLoad(() => {
   handleLoginConfirm();
 });
@@ -33,6 +34,9 @@ async function handleLoginConfirm() {
   const { scene } = router.params;
   console.log('场景scene:', scene);
   if (!scene) return;
+  //
+  const token = await retryGetToken();
+  if (!token) return;
   await API.auth.loginConfirm({ sc: scene });
   Taro.showToast({
     title: `扫码成功`,
