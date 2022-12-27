@@ -41,7 +41,7 @@ async function loginTruth() {
     return Promise.reject(null);
   }
   //
-  const { token } = data;
+  const token = data;
   Taro.setStorageSync(LOGIN_TOKEN, token);
 
   Taro.showToast({
