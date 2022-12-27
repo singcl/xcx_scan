@@ -15,5 +15,5 @@ export enum Code {
 
 //
 export enum BusinessCode {
-  LOGIN_EXPIRED = 60103,
+  LOGIN_EXPIRED = 20501,
 }
