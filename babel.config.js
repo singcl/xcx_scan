@@ -1,22 +1,28 @@
 // babel-preset-taro 更多选项和默认值：
 // https://github.com/NervJS/taro/blob/next/packages/babel-preset-taro/README.md
+/* eslint-disable import/no-commonjs */
 module.exports = {
+  // See name normalization for more specifics on configuring the path of a plugin or preset.
+  // https://babel.dev/docs/en/options#name-normalization
   presets: [
-    ['taro', {
-      framework: 'vue3',
-      ts: true
-    }]
+    [
+      'taro',
+      {
+        framework: 'vue3',
+        ts: true,
+      },
+    ],
   ],
   plugins: [
     [
-      "import",
+      'import',
       {
-        "libraryName": "@nutui/nutui-taro",
-        "libraryDirectory": "dist/packages/_es",
-        "style": (name, file) => name.toLowerCase().replace('_es/', '') + '/index.scss',
-        "camel2DashComponentName": false
+        libraryName: '@nutui/nutui-taro',
+        libraryDirectory: 'dist/packages/_es',
+        style: (name /* file */) => name.toLowerCase().replace('_es/', '') + '/index.scss',
+        camel2DashComponentName: false,
       },
-      'nutui3-taro'
-    ]
-  ]
-}
+      'nutui3-taro',
+    ],
+  ],
+};
