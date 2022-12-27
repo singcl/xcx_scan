@@ -11,7 +11,12 @@
   </view>
 </template>
 
-<script setup>
+<script lang="ts">
+export default {
+  name: 'XmIndex',
+};
+</script>
+<script setup lang="ts">
 import { reactive, toRefs } from 'vue';
 import Taro, { useLoad } from '@tarojs/taro';
 import API from '@/api';
@@ -31,7 +36,7 @@ const state = reactive({
 // 确定扫码状态
 async function handleLoginConfirm() {
   const router = Taro.getCurrentInstance().router;
-  const { scene } = router.params;
+  const { scene = null } = router ? router.params : {};
   console.log('场景scene:', scene);
   if (!scene) return;
   //

@@ -4,6 +4,7 @@ import { pinia } from '@/stores';
 import '@/services/http';
 
 import App from './App.vue';
+
 const app = createApp(App);
 
 app.use(pinia);
