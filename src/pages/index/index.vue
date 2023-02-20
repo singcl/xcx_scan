@@ -26,7 +26,7 @@ useLoad(() => {
 });
 //
 const state = reactive({
-  msg: '欢迎使用 NutUI3.0 开发小程序',
+  msg: '欢迎使用 NutUI3.x 开发小程序',
   msg2: '你成功了～',
   type: 'text',
   show: false,
